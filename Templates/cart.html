@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Кошик — Quantum Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="background: #0f0e17; color: white; font-family: sans-serif; margin: 0;">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: #121019; border-bottom: 1px solid #2a2438;">
+        <span style="font-size: 20px; font-weight: bold; color: #a29bfe;">Quantum Portal — Кошик</span>
+        <a href="{{ url_for('catalog') }}" style="color: #dfe6e9; text-decoration: none;">← Продовжити покупки</a>
+    </div>
+
+    <div style="padding: 30px;">
+        <h2>Ваш кошик товарів</h2>
+
+        {% if cart_items %}
+            <table style="width: 100%; border-collapse: collapse; background: #171520; margin-top: 20px; border-radius: 8px; overflow: hidden;">
+                <tr style="background: #221f2e; text-align: left;">
+                    <th style="padding: 12px;">Товар</th>
+                    <th style="padding: 12px;">Ціна</th>
+                    <th style="padding: 12px;">Кількість</th>
+                    <th style="padding: 12px;">Сума</th>
+                    <th style="padding: 12px;">Дія</th>
+                </tr>
+                {% for item in cart_items %}
+                <tr style="border-bottom: 1px solid #2a2438;">
+                    <td style="padding: 12px;">{{ item.product.name }}</td>
+                    <td style="padding: 12px;">{{ item.product.price }} грн</td>
+                    <td style="padding: 12px;">{{ item.quantity }}</td>
+                    <td style="padding: 12px; color: #00cec9;">{{ item.subtotal }} грн</td>
+                    <td style="padding: 12px;">
+                        <a href="{{ url_for('remove_from_cart', position_id=item.product.id) }}" style="color: #ff7675; text-decoration: none;">Видалити</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <h3 style="margin-top: 20px;">Загальна сума до сплати: <span style="color: #00cec9;">{{ total_sum }} грн</span></h3>
+
+            <form action="{{ url_for('create_order') }}" method="POST" style="margin-top: 20px;">
+                <button type="submit" style="background: #00b894; color: white; border: none; padding: 12px 25px; font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold;">Оформити замовлення</button>
+            </form>
+        {% else %}
+            <p style="color: #b2bec3; margin-top: 20px;">Ваш кошик наразі порожній.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

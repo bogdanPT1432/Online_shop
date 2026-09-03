@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Деталі замовлення №{{ order.id }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="{{ url_for('my_orders') }}">← Назад до списку замовлень</a>
+    <h2>Замовлення №{{ order.id }}</h2>
+
+    <p><b>Дата та час:</b> {{ order.created_at }}</p>
+    <p><b>Статус:</b> {{ order.status }}</p>
+    <p><b>Склад замовлення:</b> {{ order.items_description }}</p>
+    <h3>Загальна сума: {{ order.total_price }} грн</h3>
+</body>
+</html>

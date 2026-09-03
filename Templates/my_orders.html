@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Мої замовлення — Quantum Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header-box">
+        <div class="header-left">
+            <div class="qp-badge">QP</div>
+            <div class="brand-title">Quantum Portal</div>
+        </div>
+        <div class="header-nav">
+            <a href="{{ url_for('index') }}">Головна</a>
+            <a href="{{ url_for('catalog') }}">Каталог</a>
+            <a href="{{ url_for('cart') }}">Кошик</a>
+            <a href="{{ url_for('my_orders') }}" style="color: #00cec9;">Мої замовлення</a>
+            {% if current_user.is_admin %}
+                <a href="{{ url_for('add_position') }}">+ Додати товар</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}" style="color: #ff7675;">Вихід ({{ current_user.username }})</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>Історія твоїх замовлень</h2>
+
+        {% if orders %}
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                {% for order in orders %}
+                    <div class="product-card" style="width: 100%; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <div>
+                            <span style="color: #a29bfe; font-weight: bold; font-size: 15px;">Замовлення №{{ order.id }}</span>
+                            <p style="color: #b2bec3; font-size: 13px; margin: 5px 0 0 0;">Дата: {{ order.date.strftime('%Y-%m-%d %H:%M') if order.date else 'Щойно' }}</p>
+                        </div>
+
+                        <div>
+                            <span style="color: #b2bec3; font-size: 13px;">Сума: </span>
+                            <span class="price" style="font-size: 18px;">{{ order.total_price }} грн</span>
+                        </div>
+
+                        <div>
+                            <span style="background: #221f2e; color: #00cec9; padding: 6px 12px; border-radius: 6px; font-size: 13px; border: 1px solid #2a2438;">
+                                Виконано
+                            </span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div style="text-align: center; padding: 50px 0;">
+                <p style="color: #b2bec3; font-size: 16px; margin-bottom: 20px;">У тебе ще немає оформлених замовлень.</p>
+                <a href="{{ url_for('catalog') }}">
+                    <button style="padding: 12px 24px;">Перейти до каталогу</button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

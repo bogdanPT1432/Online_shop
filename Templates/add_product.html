@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Додати товар — Quantum Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <a href="{{ url_for('index') }}" class="logo">
+            <div class="logo-icon">QP</div>
+            Quantum Portal
+        </a>
+        <nav>
+            <a href="{{ url_for('index') }}">Головна</a>
+            <a href="{{ url_for('catalog') }}">Каталог</a>
+            <a href="{{ url_for('logout') }}">Вихід</a>
+        </nav>
+    </header>
+
+    <div class="container" style="max-width: 500px;">
+        <h1>Додати новий товар</h1>
+
+        <form method="POST" style="background: #1a1c29; padding: 25px; border-radius: 10px; border: 1px solid #2d3250;">
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px;">Назва товару</label>
+                <input type="text" name="title" required style="width: 100%; padding: 10px; background: #0f111a; border: 1px solid #2d3250; color: white; border-radius: 6px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px;">Ціна (грн)</label>
+                <input type="number" step="0.01" name="price" required style="width: 100%; padding: 10px; background: #0f111a; border: 1px solid #2d3250; color: white; border-radius: 6px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px;">Категорія</label>
+                <select name="category" style="width: 100%; padding: 10px; background: #0f111a; border: 1px solid #2d3250; color: white; border-radius: 6px;">
+                    <option value="hardware">Залізо та Техніка</option>
+                    <option value="games">Ігри</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 5px;">Опис</label>
+                <textarea name="description" rows="3" style="width: 100%; padding: 10px; background: #0f111a; border: 1px solid #2d3250; color: white; border-radius: 6px;"></textarea>
+            </div>
+            <button type="submit" class="btn" style="width: 100%; cursor: pointer; border: none;">Зберегти товар</button>
+        </form>
+    </div>
+
+</body>
+</html>

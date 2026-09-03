@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Вхід — Quantum Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header-box">
+        <div class="header-left">
+            <div class="qp-badge">QP</div>
+            <div class="brand-title">Quantum Portal</div>
+        </div>
+        <div class="header-nav">
+            <a href="{{ url_for('index') }}">Головна</a>
+            <a href="{{ url_for('catalog') }}">Каталог</a>
+            <a href="{{ url_for('register') }}">Реєстрація</a>
+        </div>
+    </div>
+
+    <div class="content" style="max-width: 380px; margin: 40px auto;">
+        <h2>Вхід до аккаунта</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <p style="color: #ff7675; margin-bottom: 15px;">{{ message }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <label style="font-size: 13px; color: #b2bec3;">Email:</label>
+            <input type="email" name="email" required>
+
+            <label style="font-size: 13px; color: #b2bec3;">Пароль:</label>
+            <input type="password" name="password" required>
+
+            <button type="submit" style="width: 100%; margin-top: 10px;">Увійти</button>
+        </form>
+    </div>
+</body>
+</html>

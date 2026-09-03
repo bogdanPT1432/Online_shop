@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Додати товар — Quantum Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="header-box">
+        <div class="header-left">
+            <div class="qp-badge">QP</div>
+            <div class="brand-title">Quantum Portal</div>
+        </div>
+        <div class="header-nav">
+            <a href="{{ url_for('index') }}">Головна</a>
+            <a href="{{ url_for('catalog') }}">Каталог</a>
+            <a href="{{ url_for('cart') }}">Кошик</a>
+            <a href="{{ url_for('logout') }}" style="color: #ff7675;">Вихід ({{ current_user.username }})</a>
+        </div>
+    </div>
+
+    <div class="content" style="max-width: 600px; margin: 0 auto;">
+        <h2>Додати новий товар</h2>
+
+        <form action="{{ url_for('add_position') }}" method="POST" enctype="multipart/form-data" style="background: #14121a; padding: 25px; border-radius: 8px; border: 1px solid #231f2e; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+
+            <label style="color: #c7c7c7; font-size: 14px;">Назва товару</label>
+            <input type="text" name="name" required placeholder="Наприклад: GeForce RTX 5060">
+
+            <label style="color: #c7c7c7; font-size: 14px;">Категорія</label>
+            <select name="category" style="width: 100%; padding: 10px; background: #14121a; color: white; border: 1px solid #231f2e; border-radius: 6px; margin-bottom: 15px;">
+                <option value="hardware">Залізо та Техніка</option>
+                <option value="games">Ігри</option>
+            </select>
+
+            <label style="color: #c7c7c7; font-size: 14px;">Ціна (грн)</label>
+            <input type="number" step="0.01" name="price" required placeholder="18000">
+
+            <label style="color: #c7c7c7; font-size: 14px;">Опис</label>
+            <textarea name="description" rows="3" placeholder="Короткий опис товару..."></textarea>
+
+            <label style="color: #c7c7c7; font-size: 14px;">Характеристики (для заліза/ігор)</label>
+            <textarea name="characteristics" rows="3" placeholder="Наприклад: Пам'ять: 8GB, Шина: 128-bit..."></textarea>
+
+            <label style="color: #c7c7c7; font-size: 14px;">Зображення товару</label>
+            <input type="file" name="file" accept="image/*" style="padding: 8px; background: #1b1724;">
+
+            <button type="submit" style="width: 100%; margin-top: 15px; padding: 12px;">Додати товар</button>
+        </form>
+    </div>
+</body>
+</html>
